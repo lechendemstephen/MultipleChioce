@@ -4,7 +4,8 @@ from .models import Questions, Courses, Answer, Result
 
 # admin management
 class CourseAdmin(admin.ModelAdmin): 
-    list_display = ('name', 'added_date')
+    list_display = ('name', 'slug', 'added_date')
+    prepopulated_fields = ({"slug": ('name', )})
 
 class QuestionAdmin(admin.ModelAdmin): 
     list_display = ('course', 'question', 'created_date')

@@ -1,0 +1,43 @@
+{% extends 'Exams/includes/base.html' %}
+{% block content %}
+
+<!-- Main Content -->
+<div class="container">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message | safe }}
+    </div>
+   {% endfor %}
+    <form id="quizForm" action="" method="POST">
+        {% csrf_token %}
+        {% for question in  questions %}
+
+        <!-- Question 1 -->
+        <div class="mb-4">
+            <h5>1. {{ question.question }}</h5>
+            {% for option in question.questions.all %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="q1a" value="{{ option.id }}">
+                <label class="form-check-label" for="q1a">
+                    {{ option.answer_text }}
+                </label>
+            </div>
+            {% endfor %}
+           
+        </div>
+      {% endfor %}
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <a href="{% url 'take_quiz' %}"><button type="submit" class="btn btn-success">Submit</button></a>
+        </div>
+    </form>
+</div>
+
+
+
+
+{% endblock %}

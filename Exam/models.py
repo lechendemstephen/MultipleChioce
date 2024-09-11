@@ -5,6 +5,7 @@ from django.db import models
 class Courses(models.Model): 
     name = models.CharField(max_length=30)
     added_date = models.DateTimeField(auto_now_add=True)
+    slug = models.CharField(max_length=300, null=True)
 
     class Meta: 
         verbose_name_plural = 'Courses'
@@ -30,9 +31,9 @@ class Questions(models.Model):
         return self.question
 
 class Answer(models.Model): 
-    question = models.ForeignKey(Questions, on_delete=models.CASCADE)
+    question = models.ForeignKey(Questions, on_delete=models.CASCADE, related_name='questions')
     answer_text = models.CharField(max_length=250, null=True)
-    is_correct = models.BooleanField()
+    is_correct = models.BooleanField(null=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -43,7 +44,7 @@ class Answer(models.Model):
 
 class Result(models.Model): 
     question = models.ForeignKey(Questions, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='answers')
     total = models.IntegerField()
 
     result_date = models.DateTimeField(auto_now_add=True)

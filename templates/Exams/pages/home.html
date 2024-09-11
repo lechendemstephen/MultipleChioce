@@ -1,82 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiple Choice Quiz</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Header -->
-    <header class="bg-primary text-white text-center py-3 mb-4">
-        <h1>Multiple Choice Quiz</h1>
-    </header>
-
-    <!-- Main Content -->
+{% extends "Exams/includes/base.html" %}
+{% block content %}
+  
+ <!-- Main Content -->
     <div class="container">
-        <form id="quizForm">
+      
+            {% for course in courses %}
             <!-- Question 1 -->
             <div class="mb-4">
-                <h5>1. What is the capital of France?</h5>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question1" id="q1a" value="a">
-                    <label class="form-check-label" for="q1a">
-                        A. Paris
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question1" id="q1b" value="b">
-                    <label class="form-check-label" for="q1b">
-                        B. London
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question1" id="q1c" value="c">
-                    <label class="form-check-label" for="q1c">
-                        C. Rome
-                    </label>
-                </div>
+               
+                <a href="{% url 'exam_detail' course.slug %}"> {{ course.name }}</a> 
+                
             </div>
+            {%endfor %}
 
-            <!-- Question 2 -->
-            <div class="mb-4">
-                <h5>2. Which planet is known as the Red Planet?</h5>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question2" id="q2a" value="a">
-                    <label class="form-check-label" for="q2a">
-                        A. Earth
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question2" id="q2b" value="b">
-                    <label class="form-check-label" for="q2b">
-                        B. Mars
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question2" id="q2c" value="c">
-                    <label class="form-check-label" for="q2c">
-                        C. Jupiter
-                    </label>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-        </form>
+            
+       
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start mt-4">
-        <div class="text-center p-3 bg-secondary text-white">
-            © 2024 Multiple Choice Quiz | All Rights Reserved
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+   
+{% endblock %}
